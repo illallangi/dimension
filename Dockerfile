@@ -10,7 +10,14 @@ COPY --from=ghcr.io/illallangi/confd-builder:v0.0.1 /go/bin/confd /usr/local/bin
 # add local files
 COPY root/ /
 
+# expose HTTP and HTTPS ports
 EXPOSE 80 443
+
+# set default variables
+ENV DIMENSION_TITLE="Default Title" \
+    DIMENSION_QUOTE="Mess with the best, Die like the rest" \
+    DIMENSION_ATTRIBUTION="Dade Murphy"
+
 # set entrypoint
 ENTRYPOINT ["custom-entrypoint"]
 
