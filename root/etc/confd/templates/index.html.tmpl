@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<!--
+	Dimension by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>{{getv "/dimension/title"}}</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="logo">
+							<span class="icon fa-hdd"></span>
+						</div>
+						<div class="content">
+							<div class="inner">
+								<h1>{{getv "/dimension/title"}}</h1>
+								<p>"{{ getv "/dimension/quote" }}"</p>
+								<p><em>- {{ getv "/dimension/attribution" }}</em></p>
+							</div>
+						</div>
+						<nav>
+							<ul>
+{{range $idx, $link := ls "/dimension/link"}}
+                              <!-- {{$idx}}: DIMENSION_LINK_{{ toUpper $link }}_* -->
+                              <li><a href="{{getv (print "/dimension/link/" $link "/href")}}">{{getv (print "/dimension/link/" $link "/title") }}</a></li>
+{{end}}
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Footer -->
+					<footer id="footer">
+					</footer>
+
+			</div>
+
+		<!-- BG -->
+			<div id="bg"></div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

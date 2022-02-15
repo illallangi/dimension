@@ -1,0 +1,9 @@
+[template]
+src  = "index.html.tmpl"
+dest = "/var/www/html/index.html"
+keys = [
+    "/dimension/title",
+    "/dimension/quote",
+    "/dimension/attribution",
+    "/dimension/link"
+]

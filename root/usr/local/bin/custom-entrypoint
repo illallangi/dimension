@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+export DIMENSION_TITLE=${DIMENSION_TITLE:-Default Title}
+export DIMENSION_QUOTE=${DIMENSION_QUOTE:-Mess with the best, Die like the rest}
+export DIMENSION_ATTRIBUTION=${DIMENSION_ATTRIBUTION:-Dade Murphy}
+
+confd -onetime -backend env || exit 1
+exec $@
