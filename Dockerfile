@@ -7,6 +7,15 @@ COPY --from=ghcr.io/illallangi/caddy-builder:v0.0.1 /usr/bin/caddy /usr/local/bi
 # install confd
 COPY --from=ghcr.io/illallangi/confd-builder:v0.0.1 /go/bin/confd /usr/local/bin/confd
 
+# install prerequisites
+RUN \
+  apt-get update \
+  && \
+  apt-get install -y \
+    musl \
+  && \
+  apt-get clean
+
 # add local files
 COPY root/ /
 
