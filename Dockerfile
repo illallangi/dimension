@@ -1,5 +1,5 @@
 # main image
-FROM docker.io/library/debian:buster-20220125
+FROM docker.io/library/debian:buster-20220228
 
 # install caddy
 COPY --from=ghcr.io/illallangi/caddy-builder:v0.0.1 /usr/bin/caddy /usr/local/bin/caddy
