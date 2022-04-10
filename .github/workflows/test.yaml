@@ -23,8 +23,8 @@ jobs:
     - uses: reviewdog/action-misspell@v1
       with:
         exclude: |
-          root/var/www/html/assets/css/fontawesome-all.min.css
-          root/var/www/html/assets/webfonts/fa-brands-400.svg
+          ./root/var/www/html/assets/css/fontawesome-all.min.css
+          ./root/var/www/html/assets/webfonts/fa-brands-400.svg
         filter_mode: nofilter
     - uses: reviewdog/action-suggester@v1
   lint-yaml:  # https://github.com/reviewdog/action-yamllint
