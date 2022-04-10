@@ -2,7 +2,7 @@
 FROM ghcr.io/illallangi/caddy-builder:v0.0.3 as caddy
 
 # confd image
-FROM ghcr.io/illallangi/confd-builder:v0.0.1 AS confd
+FROM ghcr.io/illallangi/confd-builder:v0.0.2 AS confd
 
 # main image
 FROM docker.io/library/debian:buster-20220328
