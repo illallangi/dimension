@@ -1,23 +1,28 @@
+# caddy image
+FROM ghcr.io/illallangi/caddy-builder:v0.0.1 as caddy
+
+# confd image
+FROM ghcr.io/illallangi/confd-builder:v0.0.1 AS confd
+
 # main image
 FROM docker.io/library/debian:buster-20220125
 
 # install caddy
-COPY --from=ghcr.io/illallangi/caddy-builder:v0.0.1 /usr/bin/caddy /usr/local/bin/caddy
+COPY --from=caddy /usr/bin/caddy /usr/local/bin/caddy
 
 # install confd
-COPY --from=ghcr.io/illallangi/confd-builder:v0.0.1 /go/bin/confd /usr/local/bin/confd
+COPY --from=confd /go/bin/confd /usr/local/bin/confd
 
 # install prerequisites
-RUN \
+RUN DEBIAN_FRONTEND=noninteractive \
   apt-get update \
   && \
-  apt-get install -y \
-    musl \
+  apt-get install -y --no-install-recommends \
+    musl=1.1.21-2 \
   && \
-  apt-get clean
-
-# add local files
-COPY root/ /
+  apt-get clean \
+  && \
+  rm -rf /var/lib/apt/lists/*
 
 # expose HTTP and HTTPS ports
 EXPOSE 80 443
