@@ -14,6 +14,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
   apt-get install -y --no-install-recommends \
     lighttpd=1.4.53-4+deb10u2 \
     musl=1.1.21-2 \
+    xz-utils=5.2.4-1 \
   && \
   apt-get clean \
   && \
@@ -22,15 +23,15 @@ RUN DEBIAN_FRONTEND=noninteractive \
 # expose HTTP port
 EXPOSE 80
 
-# set default variables
-ENV DIMENSION_TITLE="Default Title" \
-    DIMENSION_QUOTE="Mess with the best, Die like the rest" \
-    DIMENSION_ATTRIBUTION="Dade Murphy"
+# set version for s6 overlay
+ARG OVERLAY_VERSION="v2.2.0.3"
+ARG OVERLAY_ARCH="amd64"
+
+# add s6 overlay
+ADD https://github.com/just-containers/s6-overlay/releases/download/${OVERLAY_VERSION}/s6-overlay-${OVERLAY_ARCH}-installer /tmp/
+RUN chmod +x /tmp/s6-overlay-${OVERLAY_ARCH}-installer && /tmp/s6-overlay-${OVERLAY_ARCH}-installer / && rm /tmp/s6-overlay-${OVERLAY_ARCH}-installer
+ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2
 
 COPY root /
 
-# set entrypoint
-ENTRYPOINT ["custom-entrypoint"]
-
-# set command
-CMD ["/usr/sbin/lighttpd","-D","-f","/etc/lighttpd/lighttpd.conf"]
+CMD ["/init"]
