@@ -1,9 +1,9 @@
 ---
 jobs:
-  docker:
+  release:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
         fetch-depth: "0"
     - env:
@@ -12,19 +12,7 @@ jobs:
         WITH_V: true
       id: version
       name: Bump version and push tag
-      uses: anothrNick/github-tag-action@1.26.0
-    - name: Bump version in __version__.py
-      uses: jacobtomlinson/gha-find-replace@master
-      with:
-        find: development
-        include: __version__.py
-        replace: ${{ steps.version.outputs.new_tag }}
-    - name: Bump version in deploy.yaml
-      uses: jacobtomlinson/gha-find-replace@master
-      with:
-        find: ${{ github.repository }}:latest
-        include: deploy.yaml
-        replace: ${{ github.repository }}:${{ steps.version.outputs.new_tag }}
+      uses: anothrNick/github-tag-action@1.38.0
     - id: meta
       name: Docker meta
       uses: docker/metadata-action@v3
@@ -58,11 +46,8 @@ jobs:
       name: Release
       uses: softprops/action-gh-release@v1
       with:
-        files: |-
-          crd.yaml
-          deploy.yaml
         tag_name: ${{ steps.version.outputs.new_tag }}
-name: ci
+name: Release
 on:
   push:
     branches:
