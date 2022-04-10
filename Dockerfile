@@ -1,5 +1,5 @@
 # caddy image
-FROM ghcr.io/illallangi/caddy-builder:v0.0.1 as caddy
+FROM ghcr.io/illallangi/caddy-builder:v0.0.3 as caddy
 
 # confd image
 FROM ghcr.io/illallangi/confd-builder:v0.0.2 AS confd
