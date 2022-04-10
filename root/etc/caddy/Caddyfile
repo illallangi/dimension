@@ -1,6 +1,0 @@
-localhost {
-    route /* {
-        root * /var/www/html
-        file_server
-    }
-}
