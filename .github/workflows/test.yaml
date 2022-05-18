@@ -6,6 +6,7 @@ jobs:
     - uses: actions/checkout@v1
     - uses: reviewdog/action-actionlint@v1
       with:
+        fail_on_error: "true"
         filter_mode: nofilter
     - uses: reviewdog/action-suggester@v1
   lint-dockerfile:  # https://github.com/reviewdog/action-hadolint
@@ -14,6 +15,7 @@ jobs:
     - uses: actions/checkout@v2
     - uses: reviewdog/action-hadolint@v1
       with:
+        fail_on_error: "true"
         filter_mode: nofilter
     - uses: reviewdog/action-suggester@v1
   lint-spelling:  # https://github.com/reviewdog/action-misspell
@@ -23,8 +25,9 @@ jobs:
     - uses: reviewdog/action-misspell@v1
       with:
         exclude: |
-          ./root/var/www/html/assets/css/fontawesome-all.min.css
-          ./root/var/www/html/assets/webfonts/fa-brands-400.svg
+          */*.min.css
+          */*.svg
+        fail_on_error: "true"
         filter_mode: nofilter
     - uses: reviewdog/action-suggester@v1
   lint-yaml:  # https://github.com/reviewdog/action-yamllint
@@ -33,6 +36,7 @@ jobs:
     - uses: actions/checkout@v2
     - uses: reviewdog/action-yamllint@v1
       with:
+        fail_on_error: "true"
         filter_mode: nofilter
     - uses: reviewdog/action-suggester@v1
   test:
@@ -42,16 +46,16 @@ jobs:
       with:
         fetch-depth: "0"
     - name: Set up QEMU
-      uses: docker/setup-qemu-action@v1
+      uses: docker/setup-qemu-action@v2
     - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v1
+      uses: docker/setup-buildx-action@v2
     - name: Build
-      uses: docker/build-push-action@v2
+      uses: docker/build-push-action@v3
       with:
         cache-from: type=gha
         cache-to: type=gha,mode=max
         context: .
-        platforms: linux/amd64
+        platforms: linux/amd64,linux/arm64
         push: false
 name: Test
 on: pull_request
