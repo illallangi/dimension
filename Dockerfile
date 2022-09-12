@@ -14,7 +14,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
   apt-get install -y --no-install-recommends \
     lighttpd=1.4.53-4+deb10u2 \
     musl=1.1.21-2 \
-    xz-utils=5.2.4-1 \
+    xz-utils=5.2.4-1+deb10u1 \
   && \
   apt-get clean \
   && \
