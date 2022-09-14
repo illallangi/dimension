@@ -32,6 +32,6 @@ ADD https://github.com/just-containers/s6-overlay/releases/download/${OVERLAY_VE
 RUN chmod +x /tmp/s6-overlay-${OVERLAY_ARCH}-installer && /tmp/s6-overlay-${OVERLAY_ARCH}-installer / && rm /tmp/s6-overlay-${OVERLAY_ARCH}-installer
 ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2
 
-COPY root /
+COPY rootfs /
 
 CMD ["/init"]
