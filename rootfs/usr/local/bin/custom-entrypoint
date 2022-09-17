@@ -1,4 +1,0 @@
-#!/usr/bin/env sh
-
-/usr/local/bin/confd -onetime -backend env || exit 1
-exec $@
