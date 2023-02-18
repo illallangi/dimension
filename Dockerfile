@@ -1,5 +1,5 @@
 # main image
-FROM ghcr.io/illallangi/debian:v0.0.9
+FROM ghcr.io/illallangi/debian:v0.0.10
 
 # install lighttpd
 RUN DEBIAN_FRONTEND=noninteractive \
