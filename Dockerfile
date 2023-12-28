@@ -1,5 +1,6 @@
 # Main image
 FROM docker.io/library/debian:bookworm-20231218
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Install packages
 RUN DEBIAN_FRONTEND=noninteractive \
